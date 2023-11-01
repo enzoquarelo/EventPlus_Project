@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Button from '../../componentes/Button/Button';
-import Input from '../../componentes/Input/Input';
+import Button from '../../Componentes/Button/Button';
+import Input from '../../Componentes/Input/Input';
 
 const TestePage = () => {
     const [n1, setN1] = useState(0);

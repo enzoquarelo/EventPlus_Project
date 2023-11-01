@@ -1,5 +1,5 @@
 import React from 'react';
-import Titulo from '../../componentes/Titulo/Titulo';
+import Titulo from '../../Componentes/Titulo/Titulo';
 
 const EventosPage = () => {
     return (
