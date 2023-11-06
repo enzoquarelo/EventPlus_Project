@@ -1,5 +1,5 @@
 import React from 'react';
-import Titulo from '../../Componentes/Titulo/Titulo';
+import Titulo from '../../components/Titulo/Titulo';
 
 const LoginPage = () => {
     return (

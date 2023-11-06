@@ -1,6 +1,6 @@
 @font-face {
   font-family: Poppins-Regular;
-  src: url(./Assets/fonts/Poppins/Poppins-Regular.ttf);
+  src: url(./assets/fonts/Poppins/Poppins-Regular.ttf);
 }
 
 * {
@@ -26,6 +26,10 @@ body {
   
   /* desktop */
 
+}
+
+.xpto{
+  color: var(--color-medium-red);
 }
 /* main {
   border: 1px solid green;
