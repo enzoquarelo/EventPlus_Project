@@ -13,7 +13,7 @@ const Nav = () => {
 
             <span className='navbar__close'>X</span>
 
-            <Link href="" className='eventlogo'>
+            <Link to="/" className='eventlogo'>
             <img 
                 className='eventlogo__logo-image' 
                 src={window.innerWidth >= 992 ? logDesktop : logMobile} 
@@ -22,9 +22,11 @@ const Nav = () => {
             </Link>
 
             <div className='navbar__items-box'>
-                <Link href="">Home</Link>
-                <Link href="">Tipos de Evento</Link>
-                <Link href="">Usuarios</Link>
+                <Link to="/">Home</Link>
+                <Link to="/eventos">Eventos</Link>
+                <Link to="/tiposeventos">Tipos de Evento</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/teste">Teste</Link>
             </div>
             
         </nav>
