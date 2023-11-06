@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './Header.css';
 
 //import componentes
@@ -10,15 +10,23 @@ import PerfilUsuario from '../PerfilUsuario/PerfilUsuario';
 import menubar from '../../assets/images/menubar.png'
 
 const Header = () => {
+
+  const [exibeNavbar, setExibeNavbar] = useState(false);
+  
   return (
     <header className="headerpage">
       <Container>
         <div className="header-flex">
+
           <img 
           src={menubar} 
-          alt="Imagem menu de barras. Serve para exibir ou esocnder o menu no smartphone" />
+          alt="Imagem menu de barras. Serve para exibir ou esocnder o menu no smartphone" 
+          onClick={() => {setExibeNavbar(true)}} 
+          />
+{/* 
+          <button onClick={() => {setExibeNavBar(false)}} >test</button> */}
 
-          <Nav />
+          <Nav exibeNavbar={exibeNavbar} setExibeNavbar={setExibeNavbar}/>
           <PerfilUsuario />
         </div>
       </Container>
