@@ -4,7 +4,11 @@ import Titulo from '../../components/Titulo/Titulo';
 const HomePage = () => {
     return (
         <div>
-            <Titulo nomePage="Home" />
+            <Titulo 
+                titleText={"Página Home"}
+                color="/"
+                additionalClass="margim-acima"
+            />
         </div>
     );
 };

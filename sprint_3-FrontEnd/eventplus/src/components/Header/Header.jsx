@@ -22,6 +22,7 @@ const Header = () => {
           src={menubar} 
           alt="Imagem menu de barras. Serve para exibir ou esocnder o menu no smartphone" 
           onClick={() => {setExibeNavbar(true)}} 
+          className="headerpage__menubar"
           />
 {/* 
           <button onClick={() => {setExibeNavBar(false)}} >test</button> */}

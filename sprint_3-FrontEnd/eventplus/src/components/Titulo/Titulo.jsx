@@ -1,11 +1,21 @@
 import React from 'react';
 import './Titulo.css'
 
-const Titulo = (props) => {
+const Titulo = ( {titleText, color = "", additionalClass = ""} ) => {
     return (
-        <div>
-            <h1 className='titulo'>Bem-vindo à {props.nomePage}</h1>
-        </div>
+        <h1 
+            className={`title ${additionalClass}`} style={{color : color}}
+        >
+            {titleText}
+
+            <hr 
+                className="title__underscore"
+                style={
+                    color !== "" ? {borderColor: color} : {}
+                }
+            />
+            
+        </h1>
     );
 };
 
