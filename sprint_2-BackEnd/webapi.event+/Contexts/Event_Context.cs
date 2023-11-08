@@ -28,7 +28,7 @@ namespace webapi.event_.Contexts
         /// <param name="optionsBuilder">Objeto com as configurações definidas</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-B541VSR; Database=event+; Integrated Security=True; TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-2KJISQH\\SENAI; Database= event+_manha; User Id= sa; Pwd= Senai@134; TrustServerCertificate= True;");
             base.OnConfiguring(optionsBuilder);
         }
     }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\49470161831\\Desktop\\webapi.event+\\webapi.event+.csproj": {}
+    "C:\\Users\\49470161831\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj": {}
   },
   "projects": {
-    "C:\\Users\\49470161831\\Desktop\\webapi.event+\\webapi.event+.csproj": {
+    "C:\\Users\\49470161831\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\49470161831\\Desktop\\webapi.event+\\webapi.event+.csproj",
+        "projectUniqueName": "C:\\Users\\49470161831\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj",
         "projectName": "webapi.event+",
-        "projectPath": "C:\\Users\\49470161831\\Desktop\\webapi.event+\\webapi.event+.csproj",
+        "projectPath": "C:\\Users\\49470161831\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj",
         "packagesPath": "C:\\Users\\49470161831\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\49470161831\\Desktop\\webapi.event+\\obj\\",
+        "outputPath": "C:\\Users\\49470161831\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\49470161831\\AppData\\Roaming\\NuGet\\NuGet.Config",
