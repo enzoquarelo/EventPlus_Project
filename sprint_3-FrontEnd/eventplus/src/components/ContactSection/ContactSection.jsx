@@ -17,11 +17,12 @@ const ContactSection = () => {
         />
         <p>
           Rua Niterói, 180 - Centro <br />
-          São Caetano do Sul - SP
+          São Caetano do Sul - SP <br />
+
+          <a href="tel:+551142252000" className="contato__telefone">
+            (11) 4225-2000
+          </a>
         </p>
-        <a href="tel:+551142252000" className="contato__telefone">
-          (11) 4225-2000
-        </a>
       </div>
     </section>
   );
