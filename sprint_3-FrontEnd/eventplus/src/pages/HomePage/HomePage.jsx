@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./HomePage.css";
 
@@ -11,10 +11,27 @@ import NextEvent from "../../components/NextEvent/NextEvent";
 import Container from "../../components/Container/Container";
 
 const HomePage = () => {
-  const [nextEvents, setNextEvents] = useState([
-    {idEvent: 1,title: "SQL Server",description: "Evento legal com o Carlão", eventDate: "10/11/2023",},
-    {idEvent: 1,title: "React.js",description: "Evento desafiador com o Edu", eventDate: "12/11/2023",}
-  ]); //dados mocados
+  const urlGetAPI = "https://localhost:7118/api";
+  const [nextEvents, setNextEvents] = useState([]); //dados mocados
+
+  {
+    useEffect(() => {
+      //roda somente na inicialização do componente
+      async function getNextEvents() {
+        try {
+          const promise = await axios.get(`${urlGetAPI}/Evento/ListarProximos`);
+
+          const dados = await promise.data;
+
+          setNextEvents(dados);
+        } catch (error) {
+          alert("erro");
+        }
+      }
+
+      getNextEvents(); //roda a função
+    }, []);
+  }
 
   return (
     <MainContent>
@@ -26,18 +43,16 @@ const HomePage = () => {
           <Titulo titleText={"Próximos Eventos"} />
 
           <div className="events-box">
-            {
-                nextEvents.map((event) => {
-                    return(
-                        <NextEvent
-                        title={event.title}
-                        description={event.description}
-                        eventDate={event.eventDate}
-                        idEvent={event.idEvent}
-                        />
-                    );
-                })
-            }
+            {nextEvents.map((event) => {
+              return (
+                <NextEvent
+                  id={event.id}
+                  eventDate={event.dataEvento}
+                  title={event.nomeEvento}
+                  description={event.descricao}
+                />
+              );
+            })}
           </div>
         </Container>
       </section>
