@@ -9,9 +9,9 @@ const NextEvent = ({ title, description, eventDate, idEvent }) => {
     }
   return (
     <article className="event-card">
-      <h2 className="event-card__title">{title}</h2>
+      <h2 className="event-card__title">{title.substr(0, 15)}</h2>
       
-      <p className="event-card__description">{description}</p>
+      <p className="event-card__description">{description.substr(0, 15)}</p>
       
       <p className="event-card__description">{eventDate}</p>
 

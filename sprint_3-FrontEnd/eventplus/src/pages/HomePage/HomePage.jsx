@@ -50,6 +50,7 @@ const HomePage = () => {
                   eventDate={event.dataEvento}
                   title={event.nomeEvento}
                   description={event.descricao}
+                  idEvent={event.idEvento}
                 />
               );
             })}
