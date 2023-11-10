@@ -7,7 +7,7 @@ const VisionSection = () => {
         <section className='vision'>
             <div className='vision__box'>
                 <Titulo titleText={"Visão"} color='white' />
-                <p className='vision__text'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, aperiam nihil maiores perspiciatis illum facere atque dolores asperiores ab iure nemo blanditiis quo. Culpa ut ducimus vel molestiae temporibus!</p>
+                <p className='vision__text'>A escola, além de ser um ambiente educacional, também dispõe eventos para os alunos com diversos temas relacionados à área de TI. Para se adequar ao mercado e agilizar seus processos internos, a empresa deseja implantar sistemas em seus procedimentos.</p>
             </div>
         </section>
     );

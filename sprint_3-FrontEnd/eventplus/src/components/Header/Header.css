@@ -7,7 +7,7 @@
 
 .header-flex {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     height: 100%;
     /* background-color: green ; */
@@ -22,6 +22,14 @@
 @media screen and (min-width: 992px) {
     .headerpage__menubar {
         display: none;
+    }
+
+    .header-flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        /* background-color: green ; */
     }
 
     .headerpage {

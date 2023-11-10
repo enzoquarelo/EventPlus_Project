@@ -36,6 +36,7 @@
   
   .vision__text {
     margin: 90px auto;
+    width: 320px;
     text-align: center;
     font-family: Poppins-Regular;
     font-size: 1rem;
@@ -52,6 +53,6 @@
     }
   
     .vision__text {
-      width: 75%;
+      width: 860px;
     }
   }

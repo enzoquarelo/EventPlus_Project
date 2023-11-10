@@ -8,6 +8,8 @@
     font-size: 0.875rem;
     padding: 10px;
     background-color: var(--color-white);
+
+    filter: drop-shadow(5px 5px 10px #0000003a);
 }
 
 .footer-page__rights {

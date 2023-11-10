@@ -10,9 +10,9 @@
 }
 
 
-.tootip {
+.tooltip {
   color: #fff !important;
-  background-color: #B51D44 !important;
+  background-color: var(--color-red) !important;
 }
 
 .event-card {
@@ -24,7 +24,7 @@
   padding: 25px;
   border: 1px solid var(--color-blue-red);
   border-radius: 5px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .event-card__title {
@@ -59,7 +59,7 @@
 
   .events-box {
     
-    justify-content: flex-start;
+    justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
     margin: 50px 0;

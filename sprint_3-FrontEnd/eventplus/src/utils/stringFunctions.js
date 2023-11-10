@@ -1,6 +1,6 @@
 export const dateFormatDbToView = date => {
-    date = date.substr(0, 10)
-    date = date.split('-')
+    date = date.substr(0, 10);
+    date = date.split('-');
 
-    return date;
+    return `${date[2]}/${date[1]}/${date[0]}`;
 }
