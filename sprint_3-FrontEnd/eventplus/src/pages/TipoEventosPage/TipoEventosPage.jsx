@@ -13,7 +13,7 @@ const TipoEventosPage = () => {
       <MainContent>
         <section className="cadastro-evento-section">
           <Container>
-              <div className="cadastro-evento-box">
+              <div className="cadastro-evento__box">
                 <Titulo titleText={"Cadastro Tipo de Eventos"} />
 
                 <ImageIllustrator imageRender={tipoEventoImage}/>
