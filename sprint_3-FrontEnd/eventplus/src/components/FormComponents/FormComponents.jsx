@@ -9,60 +9,69 @@ export const Input = ({
     additionalClass,
     name,
     placeholder,
-    manipulatorFunction
-}) => {
-    return(
-        <input 
-            type={type}
-            id={id}
-            value={value}
-            required={required? "required" : ""}
-            className={`input-component ${additionalClass}`}
-            name={name}
-            placeholder={placeholder}
-            onChange={manipulatorFunction}
-            autoComplete='off'
-        />
+    fnManipulator,
+  }) => {
+    return (
+      <input
+        type={type}
+        id={id}
+        value={value}
+        required={required ? "required" : ""}
+        name={name}
+        className={`input-component ${additionalClass}`}
+        placeholder={placeholder}
+        onChange={fnManipulator}
+        autoComplete="off"
+      />
     );
-};
-
-export const Label = (htmlFor, labelText) => {
-    return <label htmlFor={htmlFor}>{labelText}</label>
-}
-
-//componente criado na forma tradicional com props ao invés do destructuring
-export const Button = (props) => {
-    return(
-        <button name={props.name} id={props.id} type={props.type} onClick={props.manipulatorFuncition} className={additionalClass}>
-            {props.textButton}
-        </button>
+  };
+  
+  export const Label = ({ htmlFor, labelText }) => {
+    return <label htmlFor={htmlFor}> {labelText} </label>;
+  };
+  
+  //componente criado recebendo props ao invés de destructuring
+  export const Button = (props) => {
+    return (
+      <button
+        id={props.id}
+        name={props.name}
+        type={props.type}
+        className={`button-component ${props.additionalClass}`}
+        onClick={props.fnManipulator}
+      >
+        {props.textButton}
+      </button>
     );
-}
-
-export const Select = ({
+  };
+  
+  export const Select = ({
     required,
     id,
     name,
     options,
-    manipulatorFuncition,
-    additionalClass,
-    defaultValue
-}) => {
-    return(
-        <select 
-            name={name} 
-            id={id}
-            required={required}
-            className={`input-component ${additionalClass}`}
-            onClick={manipulatorFuncition}
-            value={defaultValue}
-        >
-            <option value="">Selecione o tipo de evento:</option>
-                {options.map((o) => {
-                    return(
-                        <option key={Math.random()} value={o.value}>{o.text}</option>
-                    );
-                })}
-       </select>
+    fnManipulator,
+    additionalClass = "",
+    defaultValue,
+  }) => {
+    return (
+      <select
+        name={name}
+        id={id}
+        required={required}
+        className={`input-component ${additionalClass}`}
+        onChange={fnManipulator}
+        defaultValue={defaultValue}
+      >
+        <option value="">Tipo Evento</option>
+        {/* options.map(??) */}
+        {options.map((o) => {
+          return (
+            <option key={Math.random()} value={o.value}>
+              {o.text}
+            </option>
+          );
+        })}
+      </select>
     );
-}
+  };
