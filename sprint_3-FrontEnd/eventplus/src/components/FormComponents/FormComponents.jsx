@@ -6,10 +6,10 @@ export const Input = ({
     id,
     value,
     required,
-    additionalClass,
     name,
     placeholder,
     fnManipulator,
+    additionalClass = "",
   }) => {
     return (
       <input

@@ -1,31 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import './TipoEventosPage.css';
+import React, { useEffect, useState } from "react";
+import "./TipoEventosPage.css";
 
 // Importando componentes
-import Titulo from '../../components/Titulo/Titulo';
-import MainContent from '../../components/Main/MainContent';
-import Container from '../../components/Container/Container';
-import ImageIllustrator from '../../components/ImageIllustrator/ImageIllustrator';
-import { Button, Input } from '../../components/FormComponents/FormComponents'
-import api, { eventsTypeResource} from '../../services/service'
-import TableTp from './TableTp/TableTp';
+import Titulo from "../../components/Titulo/Titulo";
+import MainContent from "../../components/Main/MainContent";
+import Container from "../../components/Container/Container";
+import ImageIllustrator from "../../components/ImageIllustrator/ImageIllustrator";
+import { Button, Input } from "../../components/FormComponents/FormComponents";
+import api, { eventsTypeResource } from "../../services/service";
+import TableTp from "./TableTp/TableTp";
+import Notification from "../../components/Notification/Notification";
 
 import tipoEventoImage from "../../assets/images/tipo-evento.svg";
 
 const TipoEventosPage = () => {
   // states
-  const [frmEdit, setFrmEdit] = useState(false); 
+  const [frmEdit, setFrmEdit] = useState(false);
   const [titulo, setTitulo] = useState("");
   const [tipoEventos, setTipoEventos] = useState([]);
+  const [notifyUser, setNotifyUser] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     // define a chamada em nossa api
     async function loadEventsType() {
       try {
         const retorno = await api.get(eventsTypeResource);
         setTipoEventos(retorno.data);
         console.log(retorno.data);
-
       } catch (error) {
         console.log("Erro na api");
         console.log(error);
@@ -35,10 +36,17 @@ const TipoEventosPage = () => {
     loadEventsType();
   }, []);
 
+  function notificationAlert() {
+    setNotifyUser({
+      titleNote: "Sucesso",
+      textNote: `Avento excluido com sucesso`,
+      imgIcon: "success",
+      imgAlt:
+        "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação",
+      showMessage: true,
+    });
+  }
 
-
-
-  
   async function handleSubmit(e) {
     e.preventDefault(); //evita o submit do formulário
     if (titulo.trim().length < 3) {
@@ -69,21 +77,34 @@ const TipoEventosPage = () => {
     alert("Cancelar a tela de edição de dados");
   }
   // cadastrar a atualização na api
-  function handleUpdate() {
-    alert("Bora Editar");
+  async function handleUpdate() {
+    try {
+      const promise = await api.delete(`${eventsTypeResource}/${idElement}`);
+      if (promise.status == 204) {
+        alert("Cadastro apagado com sucesso!");
+
+        const buscaEventos = await api.get(eventsTypeResource);
+
+        setTipoEventos(buscaEventos.data);
+      }
+    } catch (error) {
+      console.log("Problemas ao apagar o elemento!");
+    }
   }
-
-
 
   // apaga o tipo de evento na api
   async function handleDelete(idElement) {
     try {
       const promise = await api.delete(`${eventsTypeResource}/${idElement}`);
-      setTipoEventos(promise.data)
+      if (promise.status == 204) {
+        alert("Cadastro apagado com sucesso!");
 
+        const buscaEventos = await api.get(eventsTypeResource);
+
+        setTipoEventos(buscaEventos.data);
+      }
     } catch (error) {
-      console.log("Erro na api");
-      console.log(error);
+      console.log("Problemas ao apagar o elemento!");
     }
   }
   return (
@@ -112,7 +133,7 @@ const TipoEventosPage = () => {
                       type={"text"}
                       required={"required"}
                       value={titulo}
-                      manipulationFunction={(e) => {
+                      fnManipulator={(e) => {
                         setTitulo(e.target.value);
                       }}
                     />
@@ -121,6 +142,14 @@ const TipoEventosPage = () => {
                       id="cadastrar"
                       name="cadastrar"
                       type="submit"
+                    />
+
+                    <Button
+                      textButton="Notify"
+                      id="notify"
+                      name=""
+                      type="submit"
+                      fnManipulator={notificationAlert}
                     />
                   </>
                 ) : (
@@ -145,6 +174,8 @@ const TipoEventosPage = () => {
           </Container>
         </section>
       </MainContent>
+
+      {<Notification {...notifyUser} setNotifyUser={setNotifyUser} />}
     </>
   );
 };
