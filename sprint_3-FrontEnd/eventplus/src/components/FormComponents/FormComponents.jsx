@@ -63,12 +63,12 @@ export const Input = ({
         onChange={fnManipulator}
         defaultValue={defaultValue}
       >
-        <option value="">Tipo Evento</option>
+        <option value="">Tipo de Evento:</option>
         {/* options.map(??) */}
         {options.map((o) => {
           return (
-            <option key={Math.random()} value={o.value}>
-              {o.text}
+            <option key={o.idTipoEvento} value={o.value}>
+              {o.titulo}
             </option>
           );
         })}
