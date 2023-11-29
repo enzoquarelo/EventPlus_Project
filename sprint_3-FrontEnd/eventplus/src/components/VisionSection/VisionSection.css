@@ -12,7 +12,6 @@
     margin-top: 50px;
     width: 100%;
     height: 742px;
-
     background-color: var(--color-red);
   }
   
@@ -23,11 +22,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
   
   .vision__title {
@@ -35,8 +29,8 @@
   }
   
   .vision__text {
+    width: 80%;
     margin: 90px auto;
-    width: 320px;
     text-align: center;
     font-family: Poppins-Regular;
     font-size: 1rem;
@@ -53,6 +47,6 @@
     }
   
     .vision__text {
-      width: 860px;
+      width: 75%;
     }
   }

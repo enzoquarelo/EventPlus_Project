@@ -1,4 +1,3 @@
-
 @font-face {
     font-family: Poppins-Regular;
     src: url(../../assets/fonts/Poppins/Poppins-Regular.ttf);
@@ -25,7 +24,7 @@
     height: 40px;
     background-color: var(--color-red);
     font-family: Poppins-Regular;
-    font-size: 1.125rem; /*se liga nesse cÃ¡lculo :)*/
+    font-size: 1.125rem; /*se liga nesse cálculo :)*/
     color: var(--color-white);
     cursor: pointer;
     outline: none;
@@ -37,6 +36,4 @@
     .button-component--middle {
         width: 45%;
     }
-
-    
 }    

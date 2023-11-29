@@ -1,12 +1,12 @@
-import React from "react";
-import './Container.css'
+import React from 'react';
+import './Container.css';
 
-const Container = ({children}) => {
+const Container = ( { children } ) => {
     return (
-        <div className="container">
-            {children}
+        <div className='container'>
+            {children }
         </div>
     );
-  };
-  
-  export default Container;
+};
+
+export default Container;

@@ -1,20 +1,20 @@
-import React from "react";
+import { useState } from 'react';
 
-const Input = ({ onChange, type, placeholder, name, id, value }) => {
-
-  return (
-    <>
-      <input
-        type={type}
-        placeholder={placeholder}
-        name={name}
-        id={id}
-        value={value}
-        onChange={onChange}
-      />
-      <span>{value}</span>
-    </>
-  );
+const Input = ({ number, setNumber, placeholder, name, id }) => {
+    return (
+        <div>
+            <input 
+                type='number'
+                placeholder={placeholder}
+                name={name}
+                id={id}
+                onChange={e => {
+                    setNumber(e.target.value)
+                }}
+            />
+            <p>{number}</p>
+        </div>
+    );
 };
 
 export default Input;

@@ -1,19 +1,20 @@
 import React from "react";
 import "./ContactSection.css";
-import Titulo from "../Titulo/Titulo";
 
-import telephoneImg from "../../assets/images/telephone-red.png";
-import contactImg from "../../assets/images/contato-map.png";
+import Title from "../Title/Title";
+
+import ContatoMap from "../../assets/images/contato-map.png";
+import telephoneImg from "../../assets/images/telephone-red.png"
 
 const ContactSection = () => {
   return (
     <section className="contato">
-      <Titulo titleText={"Contato"} />
+      <Title text="Contato" />
 
       <div className="contato__endereco-box">
         <img
-          src={contactImg}
-          alt="Imagem ilustrativa de um mapa"
+          src={ContatoMap}
+          alt="Imagem puramente ilustrativa de um mapa"
           className="contato__img-map"
         />
         <p>

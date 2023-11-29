@@ -7,11 +7,11 @@ export const eventsResource = '/Evento'
 /**
  * route to nextEvents
  */
-export const nextEventssResource = '/Evento/ListarProximos'
+export const listNextEventsResource = '/Evento/ListarProximos'
 /**
  * route to eventTypes
  */
-export const eventsTypeResource = '/TiposEvento'
+export const eventTypesResource = '/TiposEvento'
 
 const portAPI = "7118";
 const localApiUrl = `https://localhost:${portAPI}/api`;

@@ -1,66 +1,74 @@
-import React, { useEffect, useState } from "react";
-import api, {nextEventssResource} from "../../services/service";
-import "./HomePage.css";
+import React, { useEffect, useState } from 'react';
+import './HomePage.css';
 
-import MainContent from "../../components/Main/MainContent";
-import Banner from "../../components/Banner/Banner";
-import VisionSection from "../../components/VisionSection/VisionSection";
-import ContactSection from "../../components/ContactSection/ContactSection";
-import Titulo from "../../components/Titulo/Titulo";
-import NextEvent from "../../components/NextEvent/NextEvent";
-import Container from "../../components/Container/Container";
+import Banner from '../../components/Banner/Banner';
+import VisionSection from '../../components/VisionSection/VisionSection';
+import ContactSection from '../../components/ContactSection/ContactSection';
+import NextEvent from '../../components/NextEvent/NextEvent';
+import Title from '../../components/Title/Title';
+import Container from '../../components/Container/Container';
+
+import api, { listNextEventsResource }  from '../../services/service';
+
+import Notification from '../../components/Notification/Notification';
 
 const HomePage = () => {
-  const [nextEvents, setNextEvents] = useState([]); //dados mocados
+    const [nextEvents, setNextEvents] = useState([]);
+    const [notifyUser, setNotifyUser] = useState()
 
-  {
-    useEffect(() => {
-      //roda somente na inicialização do componente
-      async function getNextEvents() {
+    const getNextEvents = async () => {
         try {
-          const promise = await api.get(nextEventssResource);
+            const promise = await api.get(listNextEventsResource);
+            const data = promise.data;
 
-          const dados = await promise.data;
-
-          setNextEvents(dados);
-        } catch (error) {
-          alert("erro");
+            setNextEvents(data);
         }
-      }
+        catch(error) {
+            notifyError('Houve um error no carregamento de informações. Verifique a sua conexão com a internet!')
+        }
+    }
 
-      getNextEvents(); //roda a função
+    useEffect(() => {
+        getNextEvents();
     }, []);
-  }
 
-  return (
-    <MainContent>
-      <Banner />
+    function notifyError(textNote) {
+        setNotifyUser({
+            titleNote: "Erro",
+            textNote,
+            imgIcon: 'danger',
+            imgAlt: 'Imagem de ilustração de erro. Homem segurando um balão com símbolo de X.',
+            showMessage: true
+        });
+    }
 
-      {/* PRÓXIMOS EVENTOS */}
-      <section className="proximos-eventos">
-        <Container>
-          <Titulo titleText={"Próximos Eventos"} />
+    return (
+        <>
+            {<Notification {...notifyUser} setNotifyUser={setNotifyUser} />}
+            <main>
+                <Banner />
+                <section className='proximos-eventos'>
+                    <Container>
+                        <Title text='Próximos Eventos' />
 
-          <div className="events-box">
-            {nextEvents.map((event) => {
-              return (
-                <NextEvent
-                  id={event.id}
-                  eventDate={event.dataEvento}
-                  title={event.nomeEvento}
-                  description={event.descricao}
-                  idEvent={event.idEvento}
-                />
-              );
-            })}
-          </div>
-        </Container>
-      </section>
-
-      <VisionSection />
-      <ContactSection />
-    </MainContent>
-  );
+                        <div className="events-box">
+                            { nextEvents.map(nextEvent => {
+                                return (
+                                    <NextEvent key={ nextEvent.idEvento }
+                                            title={ nextEvent.nomeEvento } 
+                                            description={ nextEvent.descricao } 
+                                            date={ nextEvent.dataEvento } 
+                                            idEvent={ nextEvent.idEvento } />
+                                )
+                            })}
+                        </div>
+                    </Container>
+                </section>
+                <VisionSection />
+                <ContactSection />
+            </main>
+        </>
+    );
 };
 
 export default HomePage;

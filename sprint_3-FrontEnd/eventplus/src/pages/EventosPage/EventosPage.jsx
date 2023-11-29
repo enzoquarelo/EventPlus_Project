@@ -1,283 +1,355 @@
-import React, { useEffect, useState } from "react";
-import Container from "../../components/Container/Container";
+import { useEffect, useState } from "react";
 
-import ImageIllustrator from "../../components/ImageIllustrator/ImageIllustrator";
-import MainContent from "../../components/Main/MainContent";
-import Titulo from "../../components/Titulo/Titulo";
-import eventoImage from "../../assets/images/evento.svg";
-import { Button, Input } from "../../components/FormComponents/FormComponents";
-import { Select } from "../../components/FormComponents/FormComponents";
-import TableEvents from "../../pages/EventosPage/TableEvents/TableEvents";
 import api, {
+  eventTypesResource,
   eventsResource,
-  eventsTypeResource,
 } from "../../services/service";
-import Spinner from "../../components/Spinner/Spinner";
-import Notification from "../../components/Notification/Notification";
 
-const EventosPage = () => {
-  //STATES
-  const [frmEdit, setFrmEdit] = useState(false); 
-  const [eventos, setEventos] = useState([]);
-  const [nome, setNome] = useState();
-  const [optionsTipoEventos, setOptionsTipoEvento] = useState([]);
-  const [editingEventType, setEditingEventType] = useState({});
-  const [descricao, setDescricao] = useState();
-  const [tipoEventos, setTipoEventos] = useState([]); 
-  const [date, setDate] = useState();
-  const [notifyUser, setNotifyUser] = useState();
+import Title from "../../components/Title/Title";
+import Container from "../../components/Container/Container";
+import ImageIllustration from "../../components/ImageIllustration/ImageIllustration";
+import {
+  Button,
+  Input,
+  Select,
+} from "../../components/FormComponents/FormComponents";
+import Table from "./Table/Table";
+import Notification from "../../components/Notification/Notification";
+import Spinner from "../../components/Spinner/Spinner";
+
+import EventImage from "../../assets/images/evento.svg";
+
+// Constraints
+const IdInstitution = "6bbd863e-5f50-4834-b2b6-7afc6f2ceec5";
+
+const EventPage = () => {
+  // Global
+  const [isEditing, setIsEditing] = useState(false);
+
+  // Event states
+  const [eventId, setEventId] = useState("");
+  const [eventTypeId, setEventTypeId] = useState("");
+  const [eventTitle, setEventTitle] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+  const [eventDate, setEventDate] = useState("");
+
+  // Lists
+  const [eventTypes, setEventTypes] = useState([]);
+  const [events, setEvents] = useState([]);
+
+  // Notification
+  const [notifyUser, setNotifyUser] = useState({});
+
+  // Sppiner
   const [showSpinner, setShowSpinner] = useState(false);
 
-  useEffect(() => {
-    async function loadEventsType() {
-      setShowSpinner(false);
+  // Create
 
-      try {
+  async function register(event) {
+    event.preventDefault();
 
-        const retorno = await api.get(eventsTypeResource);
-        setOptionsTipoEvento(retorno.data);
-        console.log(retorno.data);
-      } catch (error) {
-        console.log("Erro na api");
-        console.log(error);
-      }
+    // Make the validations
+
+    setShowSpinner(true);
+
+    try {
+      await api.post(eventsResource, getEventStates());
+
+      loadEvents();
+      resetForm();
+      scrollToTable();
+      notifySuccess("Evento criado com sucesso");
+    } catch (err) {
+      notifyError(
+        "Houve um error ao enviar. Verifique a sua conexão com a internet!"
+      );
     }
 
-    loadEventsType();
-  }, []);
-  useEffect(() => {
-    async function loadEvents() {
-      try {
-        const retorno = await api.get(eventsResource);
-        setEventos(retorno.data);
-        console.log(retorno);
-      } catch (error) {
-        console.log("Erro na api");
-        console.log(error);
-      }
-    }
-    loadEvents();
-  }, []);
-
-  async function handleSubmit(e) {
-    // e.preventDefault();
-    //   try{
-    //     const instituicaoEvento = await api.post(instituicaoResource);
-    //     const retorno = await api.get(eventResource, {
-    //     nomeEvento: nome,
-    //     descricao: descricao,
-    //     dataEvento: date,
-    //     idTipoEvento: tipoEventos,
-    //     idInstituicao: instituicaoEvento.idInstituicao,
-    //   });
-    // }catch(error){
-    //   setNotifyUser({
-    //     titleNote: "Erro",
-    //     textNote: `Erro na operacao. por favor verifique a conexao`,
-    //     imgIcon: "danger",
-    //     imgAlt:
-    //       "Imagem de ilustração de sucesso. Moça segurando um balão com simbolo d confirmação",
-    //     showMessage: true,
-    //   });
-    // }
+    setShowSpinner(false);
   }
 
-  async function handleUpdate() {}
+  // Read
 
+  async function loadEventTypes() {
+    setShowSpinner(true);
 
-  async function showUpdateForm(elementId, elementTitle, elementDescricao, elementTipoEventos, elementDate) {
-    setFrmEdit(true);
-    setEditingEventType({
-      id: elementId,
-      setNome: elementTitle,
-      setDescricao: elementDescricao,
-      setTipoEventos: elementTipoEventos,
-      setDate: elementDate,
+    try {
+      const response = await api.get(eventTypesResource);
+      const data = response.data.map((eventType) => {
+        return { value: eventType.idTipoEvento, text: eventType.titulo };
+      });
+      setEventTypes(data);
+    } catch (err) {
+      notifyError(
+        "Houve um error no carregamento de dados. Verifique a sua conexão com a internet!"
+      );
+    }
+
+    setShowSpinner(false);
+  }
+
+  async function loadEvents() {
+    setShowSpinner(true);
+
+    try {
+      const eventsResponse = await api.get(eventsResource);
+      const data = eventsResponse.data.map((event) => {
+        return {
+          id: event.idEvento,
+          title: event.nomeEvento,
+          description: event.descricao,
+          date: event.dataEvento.slice(0, 10),
+          eventTypeId: event.idTipoEvento,
+          eventTypeTitle: event.tiposEvento.titulo,
+        };
+      });
+      setEvents(data);
+    } catch (err) {
+      notifyError(
+        "Houve um error no carregamento de dados. Verifique a sua conexão com a internet!"
+      );
+    }
+
+    setShowSpinner(false);
+  }
+
+  // Update
+
+  async function update(event) {
+    event.preventDefault();
+
+    // Validations
+
+    setShowSpinner(true);
+
+    try {
+      await api.put(`${eventsResource}/${eventId}`, getEventStates());
+
+      loadEvents();
+      resetForm();
+      scrollToTable();
+      notifySuccess("Evento atualizado com sucesso");
+    } catch (err) {
+      notifyError(
+        "Houve um error ao atualizar. Verifique a sua conexão com a internet!"
+      );
+    }
+
+    setShowSpinner(true);
+  }
+
+  function showEditForm(eventElement) {
+    setIsEditing(true);
+
+    setEventId(eventElement.id);
+    setEventTitle(eventElement.title);
+    setEventDescription(eventElement.description);
+    setEventDate(eventElement.date);
+    setEventTypeId(eventElement.eventTypeId);
+
+    scrollUp();
+  }
+
+  // Delete
+
+  async function deleteById(id) {
+    if (!window.confirm("Deseja realmente excluir esse tipo de evento?"))
+      return;
+
+    try {
+      api.delete(`${eventsResource}/${id}`);
+      setEvents(events.filter((event) => event.id != id));
+      notifySuccess("Evento removido com sucesso");
+    } catch (err) {
+      notifyError(
+        "Houve um error ao deletar. Verifique a sua conexão com a internet!"
+      );
+    }
+  }
+
+  // Utils
+
+  function resetForm() {
+    setIsEditing(false);
+
+    // Reseting event properties
+    setEventId("");
+    setEventTitle("");
+    setEventDescription("");
+    setEventDate("");
+    setEventTypeId("");
+  }
+
+  function getEventStates() {
+    return {
+      dataEvento: eventDate,
+      nomeEvento: eventTitle,
+      descricao: eventDescription,
+      idTipoEvento: eventTypeId,
+      idInstituicao: IdInstitution,
+    };
+  }
+
+  // Notification functions
+
+  function notifySuccess(textNote) {
+    setNotifyUser({
+      titleNote: "Sucesso",
+      textNote,
+      imgIcon: "success",
+      imgAlt:
+        "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
+      showMessage: true,
     });
+  }
 
+  function notifyError(textNote) {
+    setNotifyUser({
+      titleNote: "Erro",
+      textNote,
+      imgIcon: "danger",
+      imgAlt:
+        "Imagem de ilustração de erro. Homem segurando um balão com símbolo de X.",
+      showMessage: true,
+    });
+  }
+
+  function notifyWarning(textNote) {
+    setNotifyUser({
+      titleNote: "Aviso",
+      textNote,
+      imgIcon: "warning",
+      imgAlt:
+        "Imagem de ilustração de aviso. Mulher em frente a um grande ponto de exclamação.",
+      showMessage: true,
+    });
+  }
+
+  // Visual effects
+
+  function scrollToTable() {
+    const table = document.querySelector("table");
+    table.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function scrollUp() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  // On Mount
 
-  function editActionAbort() {
-    setFrmEdit(false);
-    setNome("");
-    setEventos(null);
-  }
-
-
-  async function handleDelete(idElement) {
-    if (window.confirm("Confirma a exclusão?")) {
-      try {
-        const caminho = await api.delete(`${eventsResource}/${idElement}`);
-
-        console.log(idElement);
-
-        if (caminho.status == 204) {
-          setNotifyUser({
-            titleNote: "Sucesso",
-            textNote: `Excluido com sucesso`,
-            imgIcon: "Success",
-            imgAlt:
-              "Imagem de ilustração de sucesso. Moça segurando um balão com simbolo d confirmação",
-            showMessage: true,
-          });
-
-          const buscaEventos = await api.get(eventsResource);
-          setEventos(buscaEventos.data);
-        }
-      } catch (error) {
-        setNotifyUser({
-          titleNote: "Erro",
-          textNote: `Erro no delete`,
-          imgIcon: "danger",
-          imgAlt:
-            "Imagem de ilustração de sucesso. Moça segurando um balão com simbolo d confirmação",
-          showMessage: true,
-        });
-        console.log(error);
-      }
-    }
-  }
+  useEffect(() => {
+    loadEventTypes();
+    loadEvents();
+  }, []);
 
   return (
     <>
-      <MainContent>
+      {<Notification {...notifyUser} setNotifyUser={setNotifyUser} />}
+      {showSpinner ? <Spinner /> : null}
+      <main>
         <section className="cadastro-evento-section">
           <Container>
             <div className="cadastro-evento__box">
-              <Titulo titleText={"Cadastro de Eventos"} />
-              <ImageIllustrator imageRender={eventoImage} />
-              {!frmEdit ? (
-                <>
-                  <form className="ftipo-evento" onSubmit={handleSubmit}>
-                    <Input
-                      id="Nome"
-                      placeholder="Nome"
-                      name={"nome"}
-                      type={"text"}
-                      required={"required"}
-                      fnManipulator={(e) => {
-                        setNome(e.target.value);
-                      }}
-                    />
-                    <Input
-                      id="Descrição"
-                      placeholder="Descrição"
-                      name={"descrição"}
-                      type={"text"}
-                      required={"required"}
-                      fnManipulator={(e) => {
-                        setDescricao(e.target.value);
-                      }}
-                    />
-                    <Input
-                      id="Data"
-                      placeholder="Data"
-                      name={"data"}
-                      type={"date"}
-                      required={"required"}
-                      fnManipulator={(e) => {
-                        setDate(e.target.value);
-                      }}
-                    />
-                    <Select
-                      id="TipoEvento"
-                      name={"tipoEventos"}
-                      required={"required"}
-                      value={tipoEventos}
-                      fnManipulator={(e) => {
-                        setTipoEventos(e.target.value);
-                      }}
-                      options={optionsTipoEventos}
-                    />
-                    <Button
-                      textButton="Cadastrar"
-                      id="cadastrar"
-                      name="cadastrar"
-                      type="submit"
-                    />
-                  </form>
-                </>
-              ) : (
-                <>
-                  <form className="ftipo-evento" onSubmit={handleSubmit}>
-                    <Input
-                      id="Nome"
-                      placeholder="Nome"
-                      name={"nome"}
-                      value={nome}
-                      type={"text"}
-                      required={"required"}
-                      fnManipulator={(e) => {
-                        setNome(e.target.value);
-                      }}
-                    />
-                    <Input
-                      id="Descrição"
-                      placeholder="Descrição"
-                      name={"descrição"}
-                      type={"text"}
-                      required={"required"}
-                      fnManipulator={(e) => {
-                        setDescricao(e.target.value);
-                      }}
-                    />
-                      <Select
-                        id="TipoEvento"
-                        name={"tipoEventos"}
-                        required={"required"}
-                        value={tipoEventos}
-                        fnManipulator={(e) => {
-                          setTipoEventos(e.target.value);
-                        }}
-                        options={optionsTipoEventos}
-                      />
-                    <Input
-                      id="Data"
-                      placeholder="Data"
-                      name={"data"}
-                      type={"date"}
-                      required={"required"}
-                      fnManipulator={(e) => {
-                        setDate(e.target.value);
-                      }}
-                    />
+              <Title text="Cadastro de evento" />
+
+              <ImageIllustration
+                image={EventImage}
+                altText="Imagem ilustrativa de evento."
+              />
+
+              <form
+                className="ftipo-evento"
+                onSubmit={isEditing ? update : register}
+              >
+                <Input
+                  id="event-title"
+                  name="event-title"
+                  type="text"
+                  value={eventTitle}
+                  required={true}
+                  placeholder="Nome"
+                  handleChange={(e) => {
+                    setEventTitle(e.target.value);
+                  }}
+                />
+
+                <Input
+                  id="event-description"
+                  name="event-description"
+                  type="text"
+                  value={eventDescription}
+                  placeholder="Descrição"
+                  required={true}
+                  handleChange={(e) => {
+                    setEventDescription(e.target.value);
+                  }}
+                />
+
+                <Input
+                  id="event-date"
+                  name="event-date"
+                  type="date"
+                  value={eventDate}
+                  required={true}
+                  handleChange={(e) => {
+                    setEventDate(e.target.value);
+                  }}
+                />
+
+                <Select
+                  id="event-type-selector"
+                  name="event-type-selector"
+                  required={true}
+                  options={eventTypes}
+                  value={eventTypeId}
+                  handleChange={(e) => {
+                    setEventTypeId(e.target.value);
+                  }}
+                />
+
+                {!isEditing ? (
+                  <Button
+                    id="sendButton"
+                    name="sendButton"
+                    textButton="Cadastrar"
+                  />
+                ) : (
+                  <>
                     <div className="buttons-editbox">
                       <Button
+                        id="updateButton"
+                        name="updateButton"
                         textButton="Atualizar"
-                        name="atualizar"
-                        id="atualizar"
                         additionalClassName="button-component--middle"
                       />
                       <Button
+                        id="cancelButton"
+                        name="cancelButton"
                         textButton="Cancelar"
-                        name="SendButton"
-                        id="SendButton"
-                        handleClick={editActionAbort}
                         additionalClassName="button-component--middle"
                       />
                     </div>
-                  </form>
-                </>
-              )}
+                  </>
+                )}
+              </form>
             </div>
           </Container>
-
-          <section className="lista-eventos-section">
-            <Container>
-              <Titulo titleText={"Lista de eventos"} color="white" />
-              <TableEvents
-                dados={eventos}
-                fnUpdate={showUpdateForm}
-                fnDelete={handleDelete}
-              />
-            </Container>
-          </section>
         </section>
-      </MainContent>
+
+        <section className="lista-eventos-section">
+          <Container>
+            <Title text="Lista de Eventos" color="white" />
+            <Table
+              data={events}
+              deleteFn={deleteById}
+              showEditFormFn={showEditForm}
+            />
+          </Container>
+        </section>
+      </main>
     </>
   );
 };
 
-export default EventosPage;
+export default EventPage;
