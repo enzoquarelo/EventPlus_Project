@@ -8,11 +8,7 @@ import api, {
 import Title from "../../components/Title/Title";
 import Container from "../../components/Container/Container";
 import ImageIllustration from "../../components/ImageIllustration/ImageIllustration";
-import {
-  Button,
-  Input,
-  Select,
-} from "../../components/FormComponents/FormComponents";
+import {Button,Input,Select,} from "../../components/FormComponents/FormComponents";
 import Table from "./Table/Table";
 import Notification from "../../components/Notification/Notification";
 import Spinner from "../../components/Spinner/Spinner";
@@ -20,7 +16,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import EventImage from "../../assets/images/evento.svg";
 
 // Constraints
-const IdInstitution = "6bbd863e-5f50-4834-b2b6-7afc6f2ceec5";
+const IdInstitution = "9eea5f2a-ad8f-4e37-8805-134171f59730";
 
 const EventPage = () => {
   // Global
@@ -43,12 +39,10 @@ const EventPage = () => {
   // Sppiner
   const [showSpinner, setShowSpinner] = useState(false);
 
-  // Create
 
   async function register(event) {
     event.preventDefault();
 
-    // Make the validations
 
     setShowSpinner(true);
 
@@ -68,7 +62,7 @@ const EventPage = () => {
     setShowSpinner(false);
   }
 
-  // Read
+
 
   async function loadEventTypes() {
     setShowSpinner(true);
@@ -108,6 +102,7 @@ const EventPage = () => {
       notifyError(
         "Houve um error no carregamento de dados. Verifique a sua conexão com a internet!"
       );
+      console.log(err);
     }
 
     setShowSpinner(false);
@@ -118,7 +113,7 @@ const EventPage = () => {
   async function update(event) {
     event.preventDefault();
 
-    // Validations
+
 
     setShowSpinner(true);
 

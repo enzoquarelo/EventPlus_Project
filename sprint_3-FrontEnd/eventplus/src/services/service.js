@@ -12,6 +12,10 @@ export const listNextEventsResource = '/Evento/ListarProximos'
  * route to eventTypes
  */
 export const eventTypesResource = '/TiposEvento'
+/**
+ * route to Login
+ */
+export const loginResource = '/Login'
 
 const portAPI = "7118";
 const localApiUrl = `https://localhost:${portAPI}/api`;
