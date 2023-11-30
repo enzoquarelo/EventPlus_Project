@@ -3,6 +3,7 @@ import './Header.css';
 
 import Container from '../Container/Container';
 import Nav from '../Nav/Nav';
+import UserProfile from '../UserProfile/PerfilUsuario';
 
 
 import MenuBarImage from '../../assets/images/menubar.png';
@@ -26,6 +27,8 @@ const Header = () => {
                     />
 
                     <Nav showMobileNavBar={showMobileNavBar} toggleShowMobileNavBar={toggleShowMobileNavBar} />
+
+                    <UserProfile/>
                 </div>
             </Container>
         </header>

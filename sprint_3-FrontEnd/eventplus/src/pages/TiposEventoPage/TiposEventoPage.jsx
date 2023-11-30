@@ -3,7 +3,7 @@ import './TiposEventoPage.css';
 
 import Title from '../../components/Title/Title';
 import Container from '../../components/Container/Container';
-import ImageIllustration from '../../components/ImageIllustration/ImageIllustration';
+import ImageIllustration from '../../components/ImageIllustration/ImageIllustration'
 
 import EventTypeImage from '../../assets/images/tipo-evento.svg';
 

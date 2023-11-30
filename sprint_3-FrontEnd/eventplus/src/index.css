@@ -11,6 +11,7 @@
 
 body {
   font-family: 'Poppins-Regular','Courier New', Courier, monospace;
+  overflow-x: hidden;
 }
 
 :root {
