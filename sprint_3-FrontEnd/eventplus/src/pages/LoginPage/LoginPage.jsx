@@ -1,82 +1,58 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./LoginPage.css";
 
 import { Input, Button } from "../../components/FormComponents/FormComponents";
 import ImageIllustrator from "../../components/ImageIllustration/ImageIllustration";
 import api, {loginResource} from "../../services/service";
-import {} from "../../"
-
+import loginImage from "../../assets/images/login.svg";
+import logo from "../../assets/images/logo-pink.svg";
+import {useNavigate} from "react-router-dom";
 import Notification from "../../components/Notification/Notification";
 import Spinner from "../../components/Spinner/Spinner";
 
-import loginImage from "../../assets/images/login.svg";
-import logo from "../../assets/images/logo-pink.svg";
+import { UserContext, userDecodeToken } from "../../context/AuthContext";
 
 const LoginPage = () => {
-  const [user, setUser] = useState({
-    email: "",
-    senha: "",
-  });
+  const [user, setUser] = useState({ email: "admin@gmail.com", senha: "123456" });
+  //importa os dados globais do usuário
+  const { userData, setUserData } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  // Notification
-  const [notifyUser, setNotifyUser] = useState({});
+  useEffect(() => {
+    if(userData.nome) {
+      navigate("/");
+    }
+  }, [userData]);
 
-  // Sppiner
-  const [showSpinner, setShowSpinner] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (user.senha.length >= 6) {
+    // validar usuário e senha:
+    // tamanho mínimo de caracteres : 3
+    if (user.email.length >= 3 && user.senha.length >= 3) {
       try {
         const promise = await api.post(loginResource, {
           email: user.email,
-          senha: user.senha
+          senha: user.senha,
         });
+        
+        const userFullToken = userDecodeToken(promise.data.token);// decodifica o token vindo da api
+
+        setUserData(userFullToken);// guarda o token globalmente
+        localStorage.setItem("token", JSON.stringify(userFullToken));
+        navigate("/");//envia o usuário para a home
+
       } catch (error) {
-        alert("Houve um error no carregamento de dados. Verifique a sua conexão com a internet !")
+        // erro da api: bad request (401) ou erro de conexão
+        alert("Verifique os dados e a conexão com a internet!");
+        console.log("ERROS NO LOGIN DO USUÁRIO");
+        console.log(error);
       }
-      
-      console.log("foi")
-      // console.log(promise.data)
     } else {
-      alert("A senha deve conter no minimo 6 caracteres")
+      alert("Preencha os dados corretamente");
     }
   }
-
-  function notifySuccess(textNote) {
-    setNotifyUser({
-      titleNote: "Sucesso",
-      textNote,
-      imgIcon: "success",
-      imgAlt:
-        "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
-      showMessage: true,
-    });
-  }
-
-  function notifyError(textNote) {
-    setNotifyUser({
-      titleNote: "Erro",
-      textNote,
-      imgIcon: "danger",
-      imgAlt:
-        "Imagem de ilustração de erro. Homem segurando um balão com símbolo de X.",
-      showMessage: true,
-    });
-  }
-
-  function notifyWarning(textNote) {
-    setNotifyUser({
-      titleNote: "Aviso",
-      textNote,
-      imgIcon: "warning",
-      imgAlt:
-        "Imagem de ilustração de aviso. Mulher em frente a um grande ponto de exclamação.",
-      showMessage: true,
-    });
-  }
-
   return (
     <div className="layout-grid-login">
       <div className="login">
@@ -85,7 +61,7 @@ const LoginPage = () => {
           <ImageIllustrator
             image={loginImage}
             altText="Imagem de um homem em frente de uma porta de entrada"
-            additionalClass="login-illustrator "
+            additionalClass="login-illustrator"
           />
         </div>
 
@@ -94,26 +70,32 @@ const LoginPage = () => {
 
           <form className="frm-login__formbox" onSubmit={handleSubmit}>
             <Input
-              className="frm-login__entry"
+              additionalClass="frm-login__entry"
               type="email"
               id="login"
               name="login"
               required={true}
               value={user.email}
               handleChange={(e) => {
-                setUser({ ...user, email: e.target.value.trim() });
+                setUser({
+                  ...user,
+                  email: e.target.value.trim(),
+                });
               }}
               placeholder="Username"
             />
             <Input
-              className="frm-login__entry"
+              additionalClass="frm-login__entry"
               type="password"
               id="senha"
               name="senha"
               required={true}
               value={user.senha}
               handleChange={(e) => {
-                setUser({ ...user, senha: e.target.value.trim() });
+                setUser({
+                  ...user,
+                  senha: e.target.value.trim(),
+                });
               }}
               placeholder="****"
             />
@@ -127,7 +109,7 @@ const LoginPage = () => {
               id="btn-login"
               name="btn-login"
               type="submit"
-              className="frm-login__button"
+              additionalClass="frm-login__button"
             />
           </form>
         </div>

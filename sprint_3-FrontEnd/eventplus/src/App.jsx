@@ -1,33 +1,22 @@
-import RouteView from './routes';
+import Rotas from "./routes/routes";
+import { UserContext } from "./context/AuthContext";
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
+// importa nosso app encapsulado pelo sistema de roteamento
 
 const App = () => {
-  const [windowSize, setWindowSize] = useState(getWindowSize()) 
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    const handleWindowSize = () => {
-      setWindowSize(getWindowSize());
-    };
-
-    window.addEventListener('resize', handleWindowSize);
-
-    return () => {
-      window.removeEventListener('resize', handleWindowSize);
-    }
-  }, [])
+    const token = localStorage.getItem("token");
+    setUserData( token === null ? {}  : JSON.parse(token) );
+  }, []);
 
   return (
-    <div className="App">
-      <RouteView/>
-    </div>
+    <UserContext.Provider value={{ userData, setUserData }}>
+      <Rotas />
+    </UserContext.Provider>
   );
-}
-
-function getWindowSize() {
-  const {innerWidth, innerHeight} = window;
-  return {innerWidth, innerHeight};
-}
-
+};
 
 export default App;
