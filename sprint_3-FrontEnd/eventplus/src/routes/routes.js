@@ -7,37 +7,47 @@ import TiposEventoPage from '../pages/TiposEventoPage/TiposEventoPage'
 import EventosPage from '../pages/EventosPage/EventosPage';
 import HomePage from '../pages/HomePage/HomePage';
 import LoginPage from '../pages/LoginPage/LoginPage';
+import EventosAlunoPage from '../pages/EventosAlunoPage/EventosAlunoPage';
 import Footer from '../components/Footer/Footer';
 import { PrivateRoute } from './PrivateRoutes';
 
 const RouteView = () => {
     return (
         <BrowserRouter>
-            <Header/>
+            <Header />
             <Routes>
-                <Route element={ <HomePage/> } path="/" exact/>
+                <Route element={<HomePage />} path="/" exact />
 
-                <Route 
-                path="/tipo-eventos"
-                element={ 
-                    <PrivateRoute redirectTo="/">
-                        <TiposEventoPage/> 
-                    </PrivateRoute>
-                } 
-                />
-
-                <Route 
-                    path="/eventos"
-                    element={ 
-                    <PrivateRoute redirectTo="/">
-                        <EventosPage/> 
-                    </PrivateRoute>
+                <Route
+                    path="/tipo-eventos"
+                    element={
+                        <PrivateRoute redirectTo="/">
+                            <TiposEventoPage />
+                        </PrivateRoute>
                     }
                 />
 
-                <Route element={ <LoginPage/> } path="/login"/>
+                <Route
+                    path="/eventos"
+                    element={
+                        <PrivateRoute redirectTo="/">
+                            <EventosPage />
+                        </PrivateRoute>
+                    }
+                />
+
+                <Route
+                    path="/eventosaluno"
+                    element={
+                        <PrivateRoute redirectTo="/">
+                            <EventosAlunoPage />
+                        </PrivateRoute>
+                    }
+                />
+
+                <Route element={<LoginPage />} path="/login" />
             </Routes>
-            <Footer/>
+            <Footer />
         </BrowserRouter>
     );
 }

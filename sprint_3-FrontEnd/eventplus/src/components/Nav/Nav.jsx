@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { UserContext } from "../../context/AuthContext";
 import './Nav.css';
 
 import { Link } from 'react-router-dom';
@@ -7,8 +6,10 @@ import { Link } from 'react-router-dom';
 import LogoMobile from '../../assets/images/logo-white.svg';
 import LogoDeskTop from '../../assets/images/logo-pink.svg';
 
+import { UserContext, userDecodeToken } from '../../context/AuthContext';
+
 const Nav = ({ showMobileNavBar, toggleShowMobileNavBar }) => {
-    const userData = useContext(UserContext)
+    const { userData } = useContext(UserContext);
 
     return (
         <nav className={`navbar ${showMobileNavBar ? 'exibeNavbar' : ''}`}>
@@ -27,12 +28,11 @@ const Nav = ({ showMobileNavBar, toggleShowMobileNavBar }) => {
                         <Link to='/eventos' className='navbar__item'>Eventos</Link>
                     </>
                 ):userData.nome && userData.role === "aluno" ?(
-                    <Link to='/eventos' className='navbar__item'>Eventos Aluno</Link>
+                    <Link to='/eventosaluno' className='navbar__item'>Eventos Aluno</Link>
                 ):(
                     null
                 )}
-
-                <Link to='/login' className='navbar__item'>Login</Link>
+                
             </div>
         </nav>
     );

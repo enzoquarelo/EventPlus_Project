@@ -16,6 +16,10 @@ export const eventTypesResource = '/TiposEvento'
  * route to Login
  */
 export const loginResource = '/Login'
+/**
+ * route to myEvents
+ */
+export const listMyEvents = '/PresencasEvento/ListarMinhas/'
 
 const portAPI = "7118";
 const localApiUrl = `https://localhost:${portAPI}/api`;
