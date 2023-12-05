@@ -19,7 +19,7 @@ export const loginResource = '/Login'
 /**
  * route to myEvents
  */
-export const listMyEvents = '/PresencasEvento/ListarMinhas/'
+export const eventPresencesResource = '/PresencasEvento'
 
 const portAPI = "7118";
 const localApiUrl = `https://localhost:${portAPI}/api`;

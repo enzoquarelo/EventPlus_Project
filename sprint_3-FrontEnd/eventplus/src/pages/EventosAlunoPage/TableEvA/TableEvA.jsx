@@ -1,7 +1,7 @@
 import React from "react";
 import { dateFormatDbToView } from "../../../utils/stringFunctions";
 
-// import ToggleSwitch from "../../../components/Toggle/Toggle";
+import ToggleSwitch from "../../../components/Toggle/Toggle";
 
 // importa a biblioteca de tootips ()
 import "react-tooltip/dist/react-tooltip.css";
@@ -41,21 +41,6 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
               <td className="tbal-data__data tbal-data__data--big">
                 {e.nomeEvento}
               </td>
-              {/* <td
-                className="tbal-data__data tbal-data__data--big tbal-data__data--handover"
-                data-tooltip-id="description-tooltip"
-                data-tooltip-content={e.descricao}
-                data-tooltip-place="top"
-              >
-                {e.descricao.substr(0, 15)} ...
-                <Tooltip
-                  id="description-tooltip"
-                  className="custom-tootip"
-                />
-              </td> */}
-              {/* <td className="tbal-data__data tbal-data__data--big">
-                {e.tiposEvento.titulo}
-              </td> */}
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                 {/* {e.dataEvento} */}
                 {dateFormatDbToView(e.dataEvento)}
@@ -70,7 +55,7 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
                   onClick={fnShowModal}
                 />
 
-                {/* <ToggleSwitch manipulationFunction={fnConnect} /> */}
+                <ToggleSwitch manipulationFunction={fnConnect} toggleActive={false}/>
               </td>
             </tr>
           );
