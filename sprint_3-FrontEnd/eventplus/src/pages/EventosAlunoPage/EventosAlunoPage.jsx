@@ -62,12 +62,14 @@ const EventosAlunoPage = () => {
           const idEvento = myevents.evento.idEvento;
           const nomeEvento = myevents.evento.nomeEvento;
           const dataEvento = myevents.evento.dataEvento;
+          const idPresencaEvento = myevents.evento.isPresencaEvento;
 
           return {
             idEvento,
             nomeEvento,
             dataEvento,
             situacao: true,
+            idPresencaEvento,
           };
 
         });
@@ -107,13 +109,17 @@ const EventosAlunoPage = () => {
     setTipoEvento(tpEvent);
   }
 
+  const showHideModal = () => {
+    setShowModal(showModal ? false : true);
+  };
+
   async function loadMyComentary(idComentary) {
     return "????";
   }
 
-  const showHideModal = () => {
-    setShowModal(showModal ? false : true);
-  };
+  async function postMyComentary(idComentary) {
+    alert("Cadastrouuu");
+  }
 
   const commentaryRemove = () => {
     alert("Remover o comentário");
@@ -127,7 +133,7 @@ const EventosAlunoPage = () => {
         const promise =  await api.post(eventPresencesResource, {
           situacao : true,
           idUsuario: userData.id,
-          idEvento: eventId
+          idEvento: eventId,
         });
 
         loadEventsType();
@@ -180,6 +186,8 @@ const EventosAlunoPage = () => {
         <Modal
           userId={userData.userId}
           showHideModal={showHideModal}
+          fnGet={loadMyComentary}
+          fnPost={postMyComentary}
           fnDelete={commentaryRemove}
         />
       ) : null}

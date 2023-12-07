@@ -10,7 +10,8 @@ const Modal = ({
   userId = null,
   showHideModal = false,
   fnDelete = null,
-  fnNewCommentary = null
+  fnGet = null,
+  fnPost = null
 
 }) => {
 
@@ -29,6 +30,7 @@ const Modal = ({
             src={trashDelete}
             className="comentary__icon-delete"
             alt="Ícone de uma lixeira"
+            //arrow function
             onClick={fnDelete}
           />
 
@@ -45,7 +47,7 @@ const Modal = ({
         <Button
           buttonText="Comentar"
           additionalClassName="comentary__button"
-          handleClick={fnNewCommentary}
+          handleClick={fnPost}
         />
       </article>
     </div>
