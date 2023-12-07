@@ -117,6 +117,7 @@ namespace webapi.event_.Repositories
                     IdPresencaEvento = p.IdPresencaEvento,
                     Situacao = p.Situacao,
                     IdUsuario = p.IdUsuario,
+                    IdEvento = p.IdEvento,
 
                     Evento = new Evento
                     {
@@ -124,6 +125,7 @@ namespace webapi.event_.Repositories
                         DataEvento = p.Evento!.DataEvento,
                         NomeEvento = p.Evento.NomeEvento,
                         Descricao = p.Evento.Descricao,
+
 
                         Instituicao = new Instituicao
                         {

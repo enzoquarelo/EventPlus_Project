@@ -13,15 +13,18 @@ namespace webapi.event_.Repositories
             _context = new Event_Context();
         }
 
-        public ComentariosEvento BuscarPorId(Guid id)
+        public ComentariosEvento BuscarPorIdComentario(Guid id)
         {
             try
             {
                 return _context.ComentariosEvento
                     .Select(c => new ComentariosEvento
                     {
+                        IdComentarioEvento = c.IdComentarioEvento,
                         Descricao = c.Descricao,
                         Exibe = c.Exibe,
+                        IdUsuario = c.IdUsuario,
+                        IdEvento = c.IdEvento,
 
                         Usuario = new Usuario
                         {
@@ -41,11 +44,44 @@ namespace webapi.event_.Repositories
             }
         }
 
+        public ComentariosEvento BuscarPorIdUsuario(Guid id)
+        {
+            try
+            {
+                return _context.ComentariosEvento
+                    .Select(c => new ComentariosEvento
+                    {
+                        IdComentarioEvento= c.IdComentarioEvento,
+                        Descricao = c.Descricao,
+                        Exibe = c.Exibe,
+                        IdUsuario = c.IdUsuario,
+                        IdEvento = c.IdEvento,
+
+                        Usuario = new Usuario
+                        {
+                            Nome = c.Usuario!.Nome
+                        },
+
+                        Evento = new Evento
+                        {
+                            NomeEvento = c.Evento!.NomeEvento,
+                        }
+
+                    }).FirstOrDefault(c => c.IdUsuario == id)!;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void Cadastrar(ComentariosEvento comentarioEvento)
         {
             try
             {
                 _context.ComentariosEvento.Add(comentarioEvento);
+
+                _context.SaveChanges();
             }
             catch (Exception)
             {
@@ -80,8 +116,11 @@ namespace webapi.event_.Repositories
                 return _context.ComentariosEvento
                     .Select(c => new ComentariosEvento
                     {
+                        IdComentarioEvento = c.IdComentarioEvento,
                         Descricao = c.Descricao,
                         Exibe = c.Exibe,
+                        IdUsuario = c.IdUsuario,
+                        IdEvento = c.IdEvento,
 
                         Usuario = new Usuario
                         {
