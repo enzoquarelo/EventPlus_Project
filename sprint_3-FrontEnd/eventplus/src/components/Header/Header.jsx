@@ -1,38 +1,34 @@
-import React, { useState } from 'react';
-import './Header.css';
+import React, { useState } from "react";
+import "./Header.css";
 
-import Container from '../Container/Container';
-import Nav from '../Nav/Nav';
-import UserProfile from '../UserProfile/PerfilUsuario';
+import Container from "../Container/Container";
+import Nav from "../Nav/Nav";
+import PerfilUsuario from "../PerfilUsuario/PerfilUsuario";
 
+import menubar from "../../assets/images/menubar.png";
 
-import MenuBarImage from '../../assets/images/menubar.png';
 
 const Header = () => {
-    const [showMobileNavBar, setShowMobileNavBar] = useState(false);
 
-    function toggleShowMobileNavBar() {
-        setShowMobileNavBar(!showMobileNavBar);
-    }
+  const [exibeNavbar, setExibeNavbar] = useState(false);//exibe/esconde menu
 
-    return (
-        <header className='headerpage'>
-            <Container>
-                <div className="header-flex">
-                    <img  
-                        onClick={toggleShowMobileNavBar} 
-                        className='headerpage__menubar'
-                        src={MenuBarImage} 
-                        alt="Imagem de menu de barras que ao clicar exibe ou esconde o menu em dispositivos móveis." 
-                    />
+  return (
+    <header className="headerpage">
+      <Container>
+        <div className="header-flex">
+          <img
+            src={menubar}
+            alt="Imagem menu de barras. Serve para exibir ou esconder o menu no smartphone."
+            onClick={()=>{setExibeNavbar(true)}}
+            className="headerpage__menubar"
+          />
 
-                    <Nav showMobileNavBar={showMobileNavBar} toggleShowMobileNavBar={toggleShowMobileNavBar} />
-
-                    <UserProfile/>
-                </div>
-            </Container>
-        </header>
-    );
+          <Nav exibeNavbar={exibeNavbar} setExibeNavbar={setExibeNavbar} />
+          <PerfilUsuario />
+        </div>
+      </Container>
+    </header>
+  );
 };
 
 export default Header;

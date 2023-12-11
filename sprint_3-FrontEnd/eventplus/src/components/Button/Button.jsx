@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
 
-const Button = ({ handleClick }) => {
-    return (
-        <button type='submit' onClick={handleClick}>
-            Calcular
-        </button>
-    );
+const Button = ({ textButton, type }) => {
+  return (
+    <button 
+      type={type}
+    >
+      {textButton}
+    </button>
+  );
 };
 
 export default Button;

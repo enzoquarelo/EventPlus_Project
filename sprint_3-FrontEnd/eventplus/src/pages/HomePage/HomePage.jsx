@@ -1,74 +1,78 @@
-import React, { useEffect, useState } from 'react';
-import './HomePage.css';
+import React, { useEffect, useState } from "react";
+import "./HomePage.css";
 
-import Banner from '../../components/Banner/Banner';
-import VisionSection from '../../components/VisionSection/VisionSection';
-import ContactSection from '../../components/ContactSection/ContactSection';
-import NextEvent from '../../components/NextEvent/NextEvent';
-import Title from '../../components/Title/Title';
-import Container from '../../components/Container/Container';
+import Banner from "../../components/Banner/Banner";
+import MainContent from "../../components/MainContent/MainContent";
+import VisionSection from "../../components/VisionSection/VisionSection";
+import ContactSection from "../../components/ContactSection/ContactSection";
+import Title from "../../components/Title/Title";
+import NextEvent from "../../components/NextEvent/NextEvent";
+import Container from "../../components/Container/Container";
+import api from "../../Services/Service";
+import Notification from "../../components/Notification/Notification";
+import { nextEventResource } from "../../Services/Service";
 
-import api, { listNextEventsResource }  from '../../services/service';
-
-import Notification from '../../components/Notification/Notification';
 
 const HomePage = () => {
-    const [nextEvents, setNextEvents] = useState([]);
-    const [notifyUser, setNotifyUser] = useState()
+  const [nextEvents, setNextEvents] = useState([]);
+  const [notifyUser, setNotifyUser] = useState(); //Componente Notification
 
-    const getNextEvents = async () => {
-        try {
-            const promise = await api.get(listNextEventsResource);
-            const data = promise.data;
+  // roda somente na inicialização do componente
+  useEffect(() => {
+    async function getNextEvents() {
+      try {
+        const promise = await api.get(nextEventResource);
+        const dados = await promise.data;
+        // console.log(dados);
+        setNextEvents(dados); //atualiza o state
 
-            setNextEvents(data);
-        }
-        catch(error) {
-            notifyError('Houve um error no carregamento de informações. Verifique a sua conexão com a internet!')
-        }
+      } catch (error) {
+        console.log("não trouxe os próximos eventos, verifique lá!");
+        // setNotifyUser({
+        //   titleNote: "Erro",
+        //   textNote: `Não foi possível carregar os próximos eventos. Verifique a sua conexão com a internet`,
+        //   imgIcon: "danger",
+        //   imgAlt:
+        //   "Imagem de ilustração de erro. Rapaz segurando um balão com símbolo x.",
+        //   showMessage: true,
+        // });
+      }
     }
 
-    useEffect(() => {
-        getNextEvents();
-    }, []);
+    getNextEvents(); //chama a função
+  }, []);
 
-    function notifyError(textNote) {
-        setNotifyUser({
-            titleNote: "Erro",
-            textNote,
-            imgIcon: 'danger',
-            imgAlt: 'Imagem de ilustração de erro. Homem segurando um balão com símbolo de X.',
-            showMessage: true
-        });
-    }
+  return (
+    
+    <MainContent>
+      {<Notification {...notifyUser} setNotifyUser={setNotifyUser} />}
+      <Banner />
 
-    return (
-        <>
-            {<Notification {...notifyUser} setNotifyUser={setNotifyUser} />}
-            <main>
-                <Banner />
-                <section className='proximos-eventos'>
-                    <Container>
-                        <Title text='Próximos Eventos' />
+      {/* PRÓXIMOS EVENTOS */}
+      <section className="proximos-eventos">
+        <Container>
+          {/* <Title titleText={"Próximos Eventos"} /> */}
 
-                        <div className="events-box">
-                            { nextEvents.map(nextEvent => {
-                                return (
-                                    <NextEvent key={ nextEvent.idEvento }
-                                            title={ nextEvent.nomeEvento } 
-                                            description={ nextEvent.descricao } 
-                                            date={ nextEvent.dataEvento } 
-                                            idEvent={ nextEvent.idEvento } />
-                                )
-                            })}
-                        </div>
-                    </Container>
-                </section>
-                <VisionSection />
-                <ContactSection />
-            </main>
-        </>
-    );
+          <div className="events-box">
+            {nextEvents.map((e) => {
+              return (
+                <NextEvent
+                  key={e.idEvento}
+                  title={e.nomeEvento}
+                  description={e.descricao}
+                  eventDate={e.dataEvento}
+                  idEvent={e.idEvento}
+                />
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      <VisionSection />
+      <ContactSection />
+    </MainContent>
+  );
 };
 
 export default HomePage;

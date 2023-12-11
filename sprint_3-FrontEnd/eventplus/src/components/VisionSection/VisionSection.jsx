@@ -1,15 +1,17 @@
 import React from 'react';
-
 import './VisionSection.css';
-
 import Title from '../Title/Title';
 
 const VisionSection = () => {
     return (
         <section className='vision'>
             <div className="vision__box">
-                <Title text='Visão' additionalClassName='vision__title' color='white' />
-                <p className="vision__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, sed hic quas non fugiat cupiditate tenetur dicta placeat nihil animi reiciendis nostrum, asperiores, sequi dolores modi aspernatur consequatur rerum accusamus?</p>
+                <Title 
+                    titleText={"Visão"}
+                    color='white'
+                    potatoClass='vision__title'
+                />
+                <p className='vision__text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus autem assumenda, suscipit distinctio debitis nihil voluptates sunt sit, nesciunt dolorum dolorem magnam vitae illum commodi, magni quod eveniet ab dolor.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus autem assumenda, suscipit distinctio debitis nihil voluptates sunt sit, nesciunt dolorum dolorem magnam vitae illum commodi, magni quod eveniet ab dolor.</p>
             </div>
         </section>
     );

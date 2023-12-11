@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState } from "react";
 import trashDelete from "../../assets/images/trash-delete-red.png";
 
 import { Button, Input } from "../FormComponents/FormComponents";
@@ -7,21 +7,35 @@ import "./Modal.css";
 const Modal = ({
   modalTitle = "Feedback",
   comentaryText = "Não informado. Não informado. Não informado.",
-  userId = null,
   showHideModal = false,
   fnDelete = null,
   fnGet = null,
-  fnPost = null
-
+  fnPost = null,
+  userId = null,
+  idEvento = null,
+  idComentario = null,
 }) => {
+  const [comentarioDesc, setComentarioDesc] = useState("");
+
+  useEffect(() => {
+    carregarDados();
+  }, []);
+
+  async function carregarDados() {
+    await fnGet(userId, idEvento);
+  }
 
   return (
     <div className="modal">
       <article className="modal__box">
-        
         <h3 className="modal__title">
           {modalTitle}
-          <span className="modal__close" onClick={()=> showHideModal(true)}>x</span>
+          <span
+            className="modal__close"
+            onClick={() => showHideModal(idEvento)}
+          >
+            x
+          </span>
         </h3>
 
         <div className="comentary">
@@ -30,8 +44,10 @@ const Modal = ({
             src={trashDelete}
             className="comentary__icon-delete"
             alt="Ícone de uma lixeira"
-            //arrow function
-            onClick={fnDelete}
+            onClick={async () => {
+              await fnDelete(idComentario);
+              await carregarDados();
+            }}
           />
 
           <p className="comentary__text">{comentaryText}</p>
@@ -41,13 +57,27 @@ const Modal = ({
 
         <Input
           placeholder="Escreva seu comentário..."
-          additionalClassName="comentary__entry"
+          additionalClass="comentary__entry"
+          value={comentarioDesc}
+          manipulationFunction={(e) => {
+            setComentarioDesc(e.target.value);
+          }}
         />
-
+        {/* {comentarioDesc} */}
+        
         <Button
-          buttonText="Comentar"
-          additionalClassName="comentary__button"
-          handleClick={fnPost}
+          textButton="Comentar"
+          additionalClass="comentary__button"
+          manipulationFunction={async () => {
+            if (idComentario !== null) {
+                alert("Já existe um comentàrio cadastrado para o evento.");
+              } else {
+                
+                await fnPost(comentarioDesc.trim(), userId, idEvento);
+                await carregarDados();
+              }
+              setComentarioDesc("");//;limpa o campo do input
+          }}
         />
       </article>
     </div>
