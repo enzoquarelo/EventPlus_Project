@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\49470161831\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj": {}
+    "C:\\Users\\enzoq\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj": {}
   },
   "projects": {
-    "C:\\Users\\49470161831\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj": {
+    "C:\\Users\\enzoq\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\49470161831\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj",
+        "projectUniqueName": "C:\\Users\\enzoq\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj",
         "projectName": "webapi.event+",
-        "projectPath": "C:\\Users\\49470161831\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj",
-        "packagesPath": "C:\\Users\\49470161831\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\49470161831\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\obj\\",
+        "projectPath": "C:\\Users\\enzoq\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\webapi.event+.csproj",
+        "packagesPath": "C:\\Users\\enzoq\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\enzoq\\Desktop\\EventPlus_Project\\sprint_2-BackEnd\\webapi.event+\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\49470161831\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\enzoq\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -108,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

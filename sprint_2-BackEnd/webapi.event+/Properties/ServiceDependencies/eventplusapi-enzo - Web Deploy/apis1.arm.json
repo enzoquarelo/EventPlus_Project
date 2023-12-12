@@ -97,11 +97,11 @@
               "type": "Microsoft.ApiManagement/service/apis",
               "name": "eventwebapi-enzo/eventwebapi-enzo",
               "properties": {
-                "displayName": "eventwebapi-enzo",
+                "displayName": "API Event+",
                 "apiRevision": "1",
-                "description": null,
+                "description": "API para gereciamento de Eventos - Backend API",
                 "subscriptionRequired": true,
-                "serviceUrl": null,
+                "serviceUrl": "https://eventwebapi-enzo.azurewebsites.net",
                 "path": "",
                 "protocols": [
                   "https"

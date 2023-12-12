@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "eventwebapi-enzo",
+      "defaultValue": "eventplusapi-enzo",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }

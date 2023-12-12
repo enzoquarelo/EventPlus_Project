@@ -72,6 +72,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 
+    //Adicionar dentro de AddSwaggerGen
     options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
     //Configura o Swagger para usar o arquivo XML gerado
@@ -105,7 +106,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-// CORS
+//Adicionar política de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy",
@@ -149,9 +150,11 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 
+//Adicionar o uso dos recursos
+app.UseRouting();
+
 app.UseCors("CorsPolicy");
 
-app.UseRouting();
 
 app.UseHttpsRedirection();
 
