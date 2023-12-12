@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.CognitiveServices.ContentModerator;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using webapi.event_.Domains;
 using webapi.event_.Interfaces;
 using webapi.event_.Repositories;
@@ -13,12 +16,72 @@ namespace webapi.event_.Controllers
     {
         ComentariosEventoRepository _comentariosEventoRepository = new ComentariosEventoRepository();
 
+        private readonly ContentModeratorClient _contentModeratorClient;
+
+        /// <summary>
+        /// Construtor que recebe os dados necessários para acesso ao serviço extreno
+        /// </summary>
+        /// <param name="contentModeratorClient">objeto do tipoContentModerator</param>
+        public ComentariosEventoController(ContentModeratorClient contentModeratorClient)
+        {
+            _contentModeratorClient= contentModeratorClient;
+        }
+
+        [HttpPost("ComentarioIA")]
+        public async Task<IActionResult> PostIA(ComentariosEvento comentario)
+        {
+            try
+            {
+                if (comentario.Descricao.IsNullOrEmpty())
+                {
+                   return BadRequest("A descrição do mentário não pode estar vazio ou nulo!");
+                }
+                
+                using var stream = new MemoryStream(Encoding.UTF8.GetBytes(comentario.Descricao));
+
+                var moderationResult = await _contentModeratorClient.TextModeration
+                    .ScreenTextAsync("text/plain", stream, "por", false, false, null, true);
+
+                if(moderationResult.Terms != null)
+                {
+                    comentario.Exibe = false;
+
+                    _comentariosEventoRepository.Cadastrar(comentario);
+                }
+                else
+                {
+                    comentario.Exibe= true;
+
+                    _comentariosEventoRepository.Cadastrar(comentario) ;
+                }
+
+                return StatusCode(201, comentario);
+            }
+            catch(Exception e) 
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
                 return Ok(_comentariosEventoRepository.Listar());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("ListarSomenteExibe")]
+        public IActionResult GetShow()
+        {
+            try
+            {
+                return Ok(_comentariosEventoRepository.ListarSomenteExibe());
             }
             catch (Exception e)
             {
