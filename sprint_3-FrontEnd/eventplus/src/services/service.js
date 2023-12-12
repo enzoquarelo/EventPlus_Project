@@ -40,12 +40,12 @@ export const institutionResource = '/Instituicao';
  */
 export const loginResource = '/Login';
 
-const externallApiUri = `https://eventwebapi-enzo.azurewebsites.net/api`;
+const localApiUri = `https://eventwebapi-enzo.azurewebsites.net/api`;
 // const externallApiUri = ``;
 // const externalApiUri = null;
 
 const api = axios.create({
-    baseURL: externallApiUri
+    baseURL: localApiUri
 });
 
 
