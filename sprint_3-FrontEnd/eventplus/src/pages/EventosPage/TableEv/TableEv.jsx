@@ -3,7 +3,7 @@ import "./TableEv.css";
 // import editPen from "../../../assets/images/edit-pen.svg";
 import editPen from "../../../assets/images/edit-pen.svg";
 import trashDelete from "../../../assets/images/trash-delete.svg";
-import { dateFormateDbToView } from "../../../Utils/stringFunctions";
+import { dateFormateDbToView } from "../../../utils/stringFunctions";
 
 // importa a biblioteca de tootips ()
 import "react-tooltip/dist/react-tooltip.css";

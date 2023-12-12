@@ -13,10 +13,10 @@ import api, {
   eventsResource,
   eventsTypeResource,
   institutionResource,
-} from "../../Services/Service";
+} from "../../services/service";
 import Spinner from "../../components/Spinner/Spinner";
 import Notification from "../../components/Notification/Notification";
-import { truncateDateFromDb } from "../../Utils/stringFunctions";
+import { truncateDateFromDb } from "../../utils/stringFunctions";
 import eventoImage from "../../assets/images/tipo-evento.svg";
 import "./EventosPage.css";
 

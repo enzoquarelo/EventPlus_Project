@@ -1,6 +1,6 @@
 import React from "react";
 import comentaryIcon from "../../../assets/images/comentary-icon.svg";
-import { dateFormateDbToView } from "../../../Utils/stringFunctions";
+import { dateFormateDbToView } from "../../../utils/stringFunctions";
 import ToggleSwitch from "../../../components/Toggle/Toggle";
 // importa a biblioteca de tootips ()
 import "react-tooltip/dist/react-tooltip.css";

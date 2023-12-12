@@ -8,9 +8,8 @@ import ContactSection from "../../components/ContactSection/ContactSection";
 import Title from "../../components/Title/Title";
 import NextEvent from "../../components/NextEvent/NextEvent";
 import Container from "../../components/Container/Container";
-import api from "../../Services/Service";
+import api, { nextEventResource } from "../../services/service";
 import Notification from "../../components/Notification/Notification";
-import { nextEventResource } from "../../Services/Service";
 
 
 const HomePage = () => {

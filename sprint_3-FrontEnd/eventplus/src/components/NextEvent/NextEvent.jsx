@@ -4,7 +4,7 @@ import "./NextEvent.css";
 import { Tooltip } from "react-tooltip";
 
 // importar a função lá do arquivo stringFunction (destructuring)
-import { dateFormatDbToView } from "../../Utils/stringFunctions";
+import { dateFormatDbToView } from "../../utils/stringFunctions";
 
 const NextEvent = ({ title, description, eventDate, idEvent }) => {
   function conectar(idEvent) {

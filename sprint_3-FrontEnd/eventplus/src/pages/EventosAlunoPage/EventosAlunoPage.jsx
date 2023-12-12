@@ -11,7 +11,7 @@ import api, {
   myEventsResource,
   presencesEventResource,
   commentaryEventResource,
-} from "../../Services/Service";
+} from "../../services/service";
 
 import "./EventosAlunoPage.css";
 import { UserContext } from "../../context/AuthContext";

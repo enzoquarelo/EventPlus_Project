@@ -40,7 +40,7 @@ export const institutionResource = '/Instituicao';
  */
 export const loginResource = '/Login';
 
-const localApiUri = `https://eventwebapi-enzo.azurewebsites.net/api`;
+const localApiUri = `https://eventplusapi-enzo.azurewebsites.net/api`;
 // const externallApiUri = ``;
 // const externalApiUri = null;
 
