@@ -58,10 +58,9 @@
 .navbar__items-box {
     height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-
-    /* border: 1px solid blue; */
+    justify-content: center;
 }
 /* links da navbar */
 .navbar__item {

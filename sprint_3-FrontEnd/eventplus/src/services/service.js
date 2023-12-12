@@ -1,12 +1,6 @@
 import axios from 'axios';
 
 /**
- * Módulo para trabalhar com apis. Disponibiliza as rotas da api bem como o serviço com a biblioteca axios
- */
-
-
-
-/**
  * Rota para o recurso Evento
  */
 export const eventsResource = '/Evento';
@@ -40,12 +34,12 @@ export const institutionResource = '/Instituicao';
  */
 export const loginResource = '/Login';
 
-const localApiUri = `https://eventplusapi-enzo.azurewebsites.net/api`;
+const localApiUrl = `https://eventplusapi-enzo.azurewebsites.net/api`;
 // const externallApiUri = ``;
 // const externalApiUri = null;
 
 const api = axios.create({
-    baseURL: localApiUri
+    baseURL: localApiUrl
 });
 
 

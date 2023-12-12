@@ -47,11 +47,6 @@ const Nav = ({ exibeNavbar, setExibeNavbar }) => {
             Eventos
           </Link>
         ) : null}
-
-        {/* <Link  className='navbar__item' to="/login">Login</Link> */}
-        {/* <Link className="navbar__item" to="/testes">
-          Testes
-        </Link> */}
       </div>
     </nav>
   );
