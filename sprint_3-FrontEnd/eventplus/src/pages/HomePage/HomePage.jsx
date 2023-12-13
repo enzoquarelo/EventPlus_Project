@@ -7,13 +7,17 @@ import VisionSection from "../../components/VisionSection/VisionSection";
 import ContactSection from "../../components/ContactSection/ContactSection";
 import Title from "../../components/Title/Title";
 import NextEvent from "../../components/NextEvent/NextEvent";
+import PreviousEvent from "../../components/PreviousEvent/PreviousEvent";
 import Container from "../../components/Container/Container";
-import api, { nextEventResource } from "../../services/service";
+import api, {
+  nextEventResource,
+  previousEventResource,
+} from "../../services/service";
 import Notification from "../../components/Notification/Notification";
-
 
 const HomePage = () => {
   const [nextEvents, setNextEvents] = useState([]);
+  const [previousEvents, setPreviousEvents] = useState([]);
   const [notifyUser, setNotifyUser] = useState(); //Componente Notification
 
   // roda somente na inicialização do componente
@@ -22,27 +26,29 @@ const HomePage = () => {
       try {
         const promise = await api.get(nextEventResource);
         const dados = await promise.data;
-        // console.log(dados);
-        setNextEvents(dados); //atualiza o state
 
+        setNextEvents(dados);
       } catch (error) {
         console.log("não trouxe os próximos eventos, verifique lá!");
-        // setNotifyUser({
-        //   titleNote: "Erro",
-        //   textNote: `Não foi possível carregar os próximos eventos. Verifique a sua conexão com a internet`,
-        //   imgIcon: "danger",
-        //   imgAlt:
-        //   "Imagem de ilustração de erro. Rapaz segurando um balão com símbolo x.",
-        //   showMessage: true,
-        // });
       }
     }
 
-    getNextEvents(); //chama a função
+    async function getPreviousEvents() {
+      try {
+        const promise = await api.get(previousEventResource);
+        const dados = await promise.data;
+
+        setPreviousEvents(dados);
+      } catch (error) {
+        console.log("não trouxe os eventos anteriores, verifique lá!");
+      }
+    }
+
+    getNextEvents();
+    getPreviousEvents();
   }, []);
 
   return (
-    
     <MainContent>
       {<Notification {...notifyUser} setNotifyUser={setNotifyUser} />}
       <Banner />
@@ -50,7 +56,7 @@ const HomePage = () => {
       {/* PRÓXIMOS EVENTOS */}
       <section className="proximos-eventos">
         <Container>
-          {/* <Title titleText={"Próximos Eventos"} /> */}
+          <Title titleText={"Próximos Eventos"} />
 
           <div className="events-box">
             {nextEvents.map((e) => {
@@ -65,6 +71,24 @@ const HomePage = () => {
               );
             })}
           </div>
+
+          <Title titleText={"Eventos Anteriores"} />
+
+          <div className="events-box">
+            {previousEvents.map((e) => {
+              return (
+                <PreviousEvent
+                  key={e.idEvento}
+                  title={e.nomeEvento}
+                  description={e.descricao}
+                  eventDate={e.dataEvento}
+                  idEvent={e.idEvento}
+                />
+              );
+            })}
+          </div>
+
+          <a className="event-card__connect-link">Ver Mais</a>
         </Container>
       </section>
 

@@ -1,0 +1,33 @@
+
+@font-face {
+    font-family: Poppins-Regular;
+    src: url(../../../assets/fonts/Poppins/Poppins-Regular.ttf);
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url(../../../assets/fonts/Poppins/Poppins-Medium.ttf);
+  }
+  
+  
+  .tooltip {
+    color: #fff !important;
+    background-color: #B51D44 !important;
+  }
+  
+  
+  @media screen and (min-width: 992px) {
+  
+    .events-box {
+      
+      justify-content: flex-start;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin: 50px 0;
+    }
+  
+    .event-card {
+      width: 220px;
+      height: 220px;
+    }
+  }

@@ -40,7 +40,7 @@
     justify-content: space-between;
   
     margin-bottom: 30px;
-    border-bottom: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--color-red);
   }
   .tbal-data__head-row--red-color {
     border-bottom-color: var(--color-red);
