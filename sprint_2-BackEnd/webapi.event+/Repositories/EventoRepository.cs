@@ -106,6 +106,19 @@ namespace webapi.event_.Repositories
             }
         }
 
+        public List<Evento> ListarAnteriores()
+        {
+            try
+            {
+                return _context.Evento
+                    .Where(e => e.DataEvento < DateTime.Now).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<Evento> ListarProximos()
         {
             try

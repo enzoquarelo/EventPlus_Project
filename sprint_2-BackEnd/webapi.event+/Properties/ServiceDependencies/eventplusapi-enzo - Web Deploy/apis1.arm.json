@@ -101,7 +101,7 @@
                 "apiRevision": "1",
                 "description": "API para gereciamento de Eventos - Backend API",
                 "subscriptionRequired": true,
-                "serviceUrl": "https://eventwebapi-enzo.azurewebsites.net",
+                "serviceUrl": "https://eventplusapi-enzo.azurewebsites.net",
                 "path": "",
                 "protocols": [
                   "https"

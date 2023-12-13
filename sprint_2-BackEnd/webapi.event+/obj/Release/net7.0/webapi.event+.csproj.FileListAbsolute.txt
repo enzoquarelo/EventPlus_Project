@@ -523,3 +523,6 @@ C:\Users\enzoq\Desktop\EventPlus_Project\sprint_2-BackEnd\webapi.event+\obj\Rele
 C:\Users\enzoq\Desktop\EventPlus_Project\sprint_2-BackEnd\webapi.event+\obj\Release\net7.0\webapi.event+.pdb
 C:\Users\enzoq\Desktop\EventPlus_Project\sprint_2-BackEnd\webapi.event+\obj\Release\net7.0\webapi.event+.genruntimeconfig.cache
 C:\Users\enzoq\Desktop\EventPlus_Project\sprint_2-BackEnd\webapi.event+\obj\Release\net7.0\ref\webapi.event+.dll
+C:\Users\49470161831\Desktop\EventPlus_Project\sprint_2-BackEnd\webapi.event+\bin\Release\net7.0\Microsoft.Azure.CognitiveServices.ContentModerator.dll
+C:\Users\49470161831\Desktop\EventPlus_Project\sprint_2-BackEnd\webapi.event+\bin\Release\net7.0\Microsoft.Rest.ClientRuntime.dll
+C:\Users\49470161831\Desktop\EventPlus_Project\sprint_2-BackEnd\webapi.event+\bin\Release\net7.0\Microsoft.Rest.ClientRuntime.Azure.dll
