@@ -76,7 +76,7 @@ namespace webapi.event_.Controllers
             }
         }
 
-        [HttpGet("ListarSomenteExibe")]
+        [HttpGet("ListarSomenteExibe/{id}")]
         public IActionResult GetShow(Guid id)
         {
             try
