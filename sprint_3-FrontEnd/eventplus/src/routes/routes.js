@@ -49,7 +49,7 @@ const Rotas = () => {
         />
 
         <Route
-          path="/mais_sobre-eventos"
+          path="/mais_sobre-eventos/:idEvent"
           element={
             <PrivateRoute redirectTo="/">
               <MaisSobreEventosPage />

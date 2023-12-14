@@ -86,9 +86,8 @@ const HomePage = () => {
                 />
               );
             })}
-          </div>
 
-          <a className="event-card__connect-link">Ver Mais</a>
+          </div>
         </Container>
       </section>
 

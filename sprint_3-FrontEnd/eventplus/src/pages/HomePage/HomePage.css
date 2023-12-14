@@ -24,5 +24,11 @@
       flex-wrap: wrap;
       margin: 50px 0;
     }
+
+    .event-more-about-link{
+      display: flex;
+      align-items: center;
+      justify-content: center ;
+    }
   }
   
