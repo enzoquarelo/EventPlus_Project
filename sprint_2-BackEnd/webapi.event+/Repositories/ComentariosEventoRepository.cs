@@ -141,7 +141,42 @@ namespace webapi.event_.Repositories
             }
         }
 
-        public List<ComentariosEvento> ListarSomenteExibe()
+        public List<ComentariosEvento> ListarPeloIdEvento(Guid id)
+        {
+            try
+            {
+                return _context.ComentariosEvento
+                    .Where(c => c.IdEvento == id)
+                    .Select(c => new ComentariosEvento
+                    {
+                        IdComentarioEvento = c.IdComentarioEvento,
+                        Descricao = c.Descricao,
+                        Exibe = c.Exibe,
+                        IdUsuario = c.IdUsuario,
+                        IdEvento = c.IdEvento,
+
+                        Usuario = new Usuario
+                        {
+                            Nome = c.Usuario!.Nome
+                        },
+
+                        Evento = new Evento
+                        {
+                            IdEvento = c.Evento!.IdEvento,
+                            NomeEvento = c.Evento!.NomeEvento,
+                            DataEvento = c.Evento!.DataEvento,
+                            Descricao = c.Evento!.Descricao
+                        }
+
+                    }).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<ComentariosEvento> ListarSomenteExibe(Guid id)
         {
 
             try
@@ -165,7 +200,7 @@ namespace webapi.event_.Repositories
                             NomeEvento = c.Evento!.NomeEvento,
                         }
 
-                    }).Where(c => c.Exibe == true).ToList();
+                    }).Where(c => c.Exibe == true && c.IdEvento == id).ToList();
             }
             catch (Exception)
             {

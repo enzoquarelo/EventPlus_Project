@@ -79,6 +79,36 @@
         "tags": [
           "ComentariosEvento"
         ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ComentariosEvento/Evento/{id}": {
+      "get": {
+        "tags": [
+          "ComentariosEvento"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"

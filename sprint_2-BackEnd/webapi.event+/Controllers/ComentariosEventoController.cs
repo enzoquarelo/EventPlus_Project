@@ -77,15 +77,36 @@ namespace webapi.event_.Controllers
         }
 
         [HttpGet("ListarSomenteExibe")]
-        public IActionResult GetShow()
+        public IActionResult GetShow(Guid id)
         {
             try
             {
-                return Ok(_comentariosEventoRepository.ListarSomenteExibe());
+                return Ok(_comentariosEventoRepository.ListarSomenteExibe(id));
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("Evento/{id}")]
+        public IActionResult GetComentariosPorEvento(Guid id)
+        {
+            try
+            {
+                var comentariosEvento = _comentariosEventoRepository.ListarPeloIdEvento(id);
+
+                if (comentariosEvento == null || comentariosEvento.Count == 0)
+                {
+                    return NotFound("Nenhum comentário encontrado para o evento com o ID fornecido.");
+                }
+
+                return Ok(comentariosEvento);
+            }
+            catch (Exception ex)
+            {
+                // Log de erro, retorno de status 500 ou outra lógica de tratamento de erro, conforme necessário.
+                return StatusCode(500, $"Erro interno: {ex.Message}");
             }
         }
 
