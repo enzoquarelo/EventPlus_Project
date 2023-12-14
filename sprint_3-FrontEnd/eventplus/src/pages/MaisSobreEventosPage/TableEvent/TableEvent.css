@@ -17,17 +17,7 @@
   
   
   @media screen and (min-width: 992px) {
-  
-    .events-box {
-      
-      justify-content: flex-start;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin: 50px 0;
-    }
-  
-    .event-card {
-      width: 220px;
-      height: 220px;
+    .events-data{
+      border: 1px solid green;
     }
   }

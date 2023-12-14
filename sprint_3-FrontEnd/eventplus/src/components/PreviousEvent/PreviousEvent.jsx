@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 import { dateFormatDbToView } from "../../utils/stringFunctions";
 
 const NextEvent = ({ title, description, eventDate, idEvent }) => {
-
+  function conectar(idEvent) {
+    alert(`Chamar o recurso para conectar: ${idEvent}`);
+  }
   return (
     <article className="event-card">
       <h2 className="event-card__title">{title}</h2>

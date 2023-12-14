@@ -60,13 +60,4 @@ const Table = ({ dados }) => {
   );
 };
 
-{
-  /* <img
-className="tbal-data__icon"
-// idevento={e.idEvento}
-src={comentaryIcon}
-alt=""
-/> */
-}
-
 export default Table;

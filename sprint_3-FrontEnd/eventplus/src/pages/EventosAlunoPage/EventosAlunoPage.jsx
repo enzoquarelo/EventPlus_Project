@@ -172,7 +172,7 @@ const EventosAlunoPage = () => {
   // cadastrar um comentário = post
   const postMyCommentary = async (descricao, idUsuario, idEvento) => {
     try {
-      const promise = await api.post(commentaryEventResource, {
+      const promise = await api.post(`${commentaryEventResource}/ComentarioIA`, {
         descricao: descricao,
         exibe: true,
         idUsuario: idUsuario,
